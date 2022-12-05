@@ -1,0 +1,29 @@
+/* components/song-cat-show-v2/song-cat-show-v2.wxss */
+/* 推荐歌曲 */
+.inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20rpx 0;
+}
+
+.inner .left {
+  display: flex;
+}
+
+.inner .info {
+  margin:20rpx;
+} 
+.inner .info  .name{
+  color: #666;
+  margin-bottom: 10rpx;
+}
+.inner .info  .al-name{
+  font-size: 26rpx;
+  color: #999;
+}
+
+.left .image .img{
+  width: 120rpx;
+  border-radius: 14rpx;
+}

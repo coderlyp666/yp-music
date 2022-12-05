@@ -1,0 +1,14 @@
+<!--pages/detail-ranking/detail-ranking.wxml-->
+
+<view class="ranking">
+  <song-header itemData="{{rankings}}" wx:if="{{ type === 'song' && rankings.name}}"/>
+  <area-title title="{{rankings.name}}" isShow="{{false}}" wx:else=""/>
+  <block wx:for="{{rankings.tracks}}" wx:key="id">
+    <song-cat-show-v1 
+      itemData="{{item}}" 
+      index="{{index}}" 
+      bindtap="onSongItemTap"
+      data-index="{{index}}"
+    />
+  </block>
+</view>

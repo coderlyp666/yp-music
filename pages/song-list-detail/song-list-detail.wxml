@@ -1,0 +1,11 @@
+<!--pages/song-list-detail/song-list-detail.wxml-->
+<view class="more-song" >
+  <block wx:for="{{moreSongs}}" wx:key="cat">
+    <area-title title="{{item.cat}}" isShow="{{false}}"/>
+    <view class="cat">
+      <block wx:for="{{ item.playlists }}" wx:key="id" wx:for-item="iten">  
+        <song-item itemData="{{ iten }}" class="song-item"/>
+      </block>
+    </view>
+  </block>
+</view>

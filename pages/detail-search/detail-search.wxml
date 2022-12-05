@@ -1,0 +1,46 @@
+<!--pages/detail-search/detail-search.wxml-->
+<van-search 
+  class="search" 
+  value="{{ keywords }}" 
+  placeholder="请输入搜索关键词" 
+  bind:change="onlyricTextchange"
+  bind:search="onSearch"
+/>
+
+<view class="content">
+  <view class="suggest" wx:if="{{keywords && !isSong}}">
+    <view class="title">
+      搜索"{{keywords}}"
+    </view>
+    <view class="suggest-list" >
+      <block wx:for="{{suggestList}}" wx:key="keyword">
+        <view class="item" bindtap="onItemTap" data-song="{{item.keyword}}">
+        <image class="icon" src="../../assets/images/icons/search_icon.png" mode="widthFix">
+        </image>
+         <view class="name">
+          {{item.keyword}}
+         </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="hotSong" wx:if="{{!isSong && !keywords}}">
+  <area-title title="热门搜索" isShow="{{false}}"/>
+  <view class="inner">
+    <block wx:for="{{hotSongs}}" wx:key="first">
+      <view class="item" bindtap="onItemTap" data-song="{{item.first}}">
+        {{item.first}}
+      </view>
+    </block>
+   </view>
+  </view>
+
+  <view class="songList" wx:if="{{isSong}}">
+    <area-title title="最佳匹配" isShow="{{false}}"/>
+    <block wx:for="{{songList}}" wx:key="id">
+      <song-cat-show-v1 itemData="{{item}}" index="{{index}}"/>
+    </block>
+    <view wx:if="{{!songList.length && songList.length}}">该歌曲不存在</view>
+  </view>
+
+</view>

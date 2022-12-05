@@ -1,0 +1,22 @@
+/* pages/main-music/main-music.wxss */
+page {
+  --search-background-color: #fff;
+  --search-padding: 10px 0;
+
+  box-sizing: border-box;
+  padding: 0 24rpx;
+  background-color: #fafafa;
+}
+/* 轮播图 */
+.banner {
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.bannerImage {
+  width: 100%;
+}
+
+
+
+

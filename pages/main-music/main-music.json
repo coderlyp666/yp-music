@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-search": "@vant/weapp/search/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "area-title":"/components/area-title/area-title",
+    "song-list":"/components/song-list/song-list",
+    "ranking-item":"/components/ranking-item/ranking-item",
+    "song-cat-show-v2":"/components/song-cat-show-v2/song-cat-show-v2"
+  },
+  "navigationBarTitleText": "音乐"
+}

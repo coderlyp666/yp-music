@@ -1,0 +1,10 @@
+<!--components/area-title/area-title.wxml-->
+<view class="area-title">
+  <view class="left">
+   {{title}}
+  </view>
+  <view class="right" wx:if="{{isShow}}" bindtap="onTap">
+    <text>更多</text>
+    <van-icon name="arrow" />
+  </view>
+</view>

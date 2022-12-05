@@ -1,0 +1,22 @@
+<!--components/nav-bar/nav-bar.wxml-->
+<view class="nav-bar">
+  <view class="left" bindtap="onNavigateBack">
+    <view class="slot">
+      <slot name="left"></slot>
+    </view>
+    <view class="default">
+        <image class="icon" src="../../assets/images/icons/left.png" mode="widthFix"/>
+      </view>
+  </view>
+  <view class="center">
+    <view class="slot">
+      <slot name="center"></slot>
+    </view>
+    <view class="default">{{title}}</view>
+  </view>
+  <view class="right">
+    <view class="slot">
+      <slot name="right"></slot>
+    </view>
+  </view>
+</view>

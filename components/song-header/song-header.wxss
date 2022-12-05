@@ -1,0 +1,71 @@
+/* components/song-header/song-header.wxss */
+.head {
+  position: relative;
+  width: 750rpx;
+  height: 480rpx;
+  z-index: -1;
+}
+.head .bj {
+  position: absolute;
+  margin-left:-24rpx ;
+  width: 100%;
+  z-index: -1;
+  
+}
+.head .bj .bj-img {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+.head .bj .cover {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 480rpx;
+  background-color: rgba(0, 0, 0, .6);
+  z-index: -1;
+}
+
+.head .content{
+  color: #fff;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-around;
+  padding: 26rpx;
+}
+
+.head .content .left .left-img{
+  width: 220rpx;
+  border-radius: 14rpx;
+}
+
+.head .content .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 50rpx;
+}
+.head .content .right .desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  font-size: 24rpx;
+}
+.head .content .buttom {
+  display: flex;
+  justify-content: space-around;
+  padding: 40rpx 50rpx 20rpx 0;
+}
+.head .content .buttom .subscribed,.share{
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.icon {
+  width: 50rpx;
+  margin-right: 10rpx;
+}

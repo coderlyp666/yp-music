@@ -1,0 +1,15 @@
+<!--components/song-cat-show-v2/song-cat-show-v2.wxml-->
+<view class="inner" bindtap="onSongItemTap">
+  <view class="left">
+    <view class="image">
+    <image class="img" src="{{itemData.al.picUrl}}" mode="widthFix"/>
+  </view>
+  <view class="info">
+    <view class="name">{{itemData.name}}</view>
+    <view class="al-name">{{itemData.ar[0].name}}</view>
+  </view>
+  </view>
+  <view class="right">
+    <van-icon name="arrow" />
+  </view>
+</view>

@@ -1,0 +1,12 @@
+/* components/song-list/song-list.wxss */
+.hot-song-list {
+  display: flex;
+  align-items: flex-start;
+}
+
+.hot-song-list .song-item {
+  width: 32%;
+  flex-shrink: 0;
+  margin-right:15rpx;
+  
+}

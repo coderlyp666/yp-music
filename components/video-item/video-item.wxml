@@ -1,0 +1,13 @@
+<wxs module="mode" src="../../utils/utils.wxs"></wxs>
+<view class="item" bindtap="onItemTap">
+  <view class="image">
+    <image src="{{itemData.cover}}" mode="widthFix"></image>
+    <view class="info">
+    <view class="playCount">{{mode.bfl(itemData.playCount)}}</view>
+    <view class="duration">{{ mode.gl(itemData.mv.videos[0].duration)}}</view>
+    </view>
+  </view>
+  <view class="content">
+    <text>{{itemData.name}} - {{itemData.artistName}}</text>
+  </view>
+</view>

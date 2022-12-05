@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "搜索音乐",
+  "usingComponents": {
+    "van-search": "@vant/weapp/search/index",
+    "area-title":"/components/area-title/area-title",
+    "song-cat-show-v1":"/components/song-cat-show-v1/song-cat-show-v1"
+  }
+}

@@ -1,0 +1,33 @@
+/* components/song-cat-show-v1/song-cat-show-v1.wxss */
+page {
+  padding: 0 26rpx;
+}
+.item {
+  display: flex;
+  align-items: center;
+  margin: 20rpx 0;
+}
+.item .index {
+  margin-right: 20rpx;
+}
+.item .song-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.item .song-info .ar{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.item .song-info .song-name {
+  margin-bottom: 10rpx;
+}
+
+.item .song-info .ar .icon {
+  width: 38rpx;
+  height: 22rpx;
+  margin-right: 10rpx;
+}

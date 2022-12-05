@@ -1,0 +1,13 @@
+<!--components/song-item/song-item.wxml-->
+<wxs src="/utils/utils.wxs" module="mode"></wxs>
+<view class="item" bindtap="onSongTap">
+    <view class="image">
+    <image class="img" src="{{itemData.coverImgUrl}}" mode="widthFix"/>
+    <view class="playCount">
+      {{ mode.bfl(itemData.playCount)}}
+    </view>
+    </view>
+    <view class="name">
+      {{itemData.name}}
+    </view>
+ </view>

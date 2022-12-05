@@ -1,0 +1,9 @@
+<!--components/song-list/song-list.wxml-->
+<view class="hot-song" wx:if="{{songList.length}}">
+  <area-title title="{{title}}" bind:onMoreTap="onMoreTap"/>
+  <scroll-view class="hot-song-list" enable-flex scroll-x>
+  <block wx:for="{{songList}}" wx:key="id">
+    <song-item itemData="{{item}}" class="song-item"/>
+  </block>
+  </scroll-view>
+</view>

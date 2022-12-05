@@ -1,0 +1,46 @@
+<!--components/song-header/song-header.wxml-->
+<wxs src="../../utils/utils.wxs" module="mode"/>
+<view class="head">
+  <!-- 背景 -->
+  <view class="bj">
+    <image class="bj-img" src="{{itemData.coverImgUrl}}" mode="aspectFill"/>
+    <view class="cover"></view>
+  </view>
+  <!-- 内容 -->
+  <view class="content">
+    <view class="inner">
+    <view class="left">
+      <image class="left-img" src="{{itemData.coverImgUrl}}" mode="widthFix"/>
+    </view>
+    <view class="right">
+      <view class="name">
+        {{itemData.name}}
+      </view>
+      <view class="desc">
+      描述：{{itemData.description}}
+      </view>
+    </view>
+  </view>
+    <view class="buttom">
+      <view class="subscribed">
+        <image 
+          class="icon" 
+          src="../../assets/images/icons/favor_icon.png" 
+          mode="widthFix"
+        >
+        </image>
+        <text>{{mode.bfl(itemData.subscribedCount)}}</text>
+      </view>
+      <view class="share">
+        <image 
+        class="icon"
+        src="../../assets/images/icons/share_icon.png"
+        mode="widthFix"
+        >
+        
+        </image>
+        <text class="text">分享</text>
+      </view>
+    </view>
+  </view>
+</view>

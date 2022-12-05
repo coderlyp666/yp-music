@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "area-title":"/components/area-title/area-title",
+    "song-item":"/components/song-item/song-item"
+  }
+}

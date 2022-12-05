@@ -1,0 +1,16 @@
+/* components/area-title/area-title.wxss */
+.area-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:34rpx 0;
+}
+
+.area-title .left {
+  font-size: 38rpx;
+  font-weight: 700;
+}
+.area-title .right {
+  font-size: 26rpx;
+  color: #999;
+}

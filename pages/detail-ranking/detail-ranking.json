@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "song-cat-show-v1":"/components/song-cat-show-v1/song-cat-show-v1",
+    "area-title":"/components/area-title/area-title",
+    "song-header":"/components/song-header/song-header"
+  },
+  "navigationBarTitleText": ""
+}

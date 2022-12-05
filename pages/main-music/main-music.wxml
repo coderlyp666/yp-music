@@ -1,0 +1,56 @@
+<!--pages/main-music/main-music.wxml-->
+<!-- 搜索框 -->
+<van-search 
+  disabled
+  placeholder="请输入搜索关键词"
+  shape="round"
+  background="#fafafa"
+  bindtap="onSearchTap"
+ />
+
+<!-- 轮播图 -->
+<swiper 
+  autoplay 	
+  indicator-dots 
+  circular 
+  style="height: {{bannerHight}}px;"
+  class="banner"
+>
+  <block wx:for="{{bannerList}}" wx:key="targetId">
+    <swiper-item>
+      <image class="bannerImage" bindload="onImageLoad" style="height: 150px;" src="{{item.imageUrl}}" mode="widthFix"/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<!-- 推荐歌曲 -->
+
+<view class="recommend" wx:if="{{RecommendedSongs.length}}">
+  <area-title title="推荐歌曲" bind:onMoreTap="onMoreTap"/>
+  <view class="recommendSongs">
+    <block wx:for="{{RecommendedSongs}}" wx:key="id">
+      <song-cat-show-v2  
+        itemData="{{item}}" 
+        bindtap="onSongItemTap"
+        data-index="{{index}}"
+      />
+    </block>
+  
+  </view>
+</view>
+
+<!-- 热门歌单 -->
+<song-list songList="{{hotSongs}}" title="热门歌单"/>
+<!-- 推荐歌单 -->
+<song-list songList="{{recSongs}}" title="推荐歌单"/>
+
+<!-- 巅峰榜 -->
+<view class="ranking" wx:if="{{rankingInfos.originalRanking}}">
+  <area-title title="巅峰榜" isShow="{{false}}"/>
+    <view class="ranking-list" wx:if="{{rankingInfos}}">
+      <block wx:for="{{rankingInfos}}" wx:key="id">
+        <ranking-item  itemData="{{item}}" key="{{index}}"/>
+      </block>
+    </view>
+</view>
+
