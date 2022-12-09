@@ -4,7 +4,9 @@ import parseLyric from "../../utils/parse-lyric"
 import playerStore from "../../store/playerStore"
 
 const app = getApp()
-const audioContext = wx.createInnerAudioContext()
+const audioContext = wx.getBackgroundAudioManager()
+audioContext.title = 'jay'
+
 const moduleNames = ["order", "repeat", "random"]
 Page({
 
@@ -20,7 +22,7 @@ Page({
 
     id:0,
     // 保存歌曲详情信息
-    songDetail:{},
+    songDetail:[],
     // 保存歌词
     lyrics:"",
     // swiper切换索引
@@ -42,6 +44,7 @@ Page({
     // store
     playerList:[],
     playerIndex:0,
+
     moduleIndex:0,//0顺序播放,1单曲循环,2随机播放
     moduleName:'order'
     },
@@ -63,9 +66,9 @@ Page({
   },
   setupSongPlay(id) {
     this.setData({id})
-    console.log(id);
     // 根据id请求歌曲详细数据
     this.fetchSongDetail(id)
+    // audioContext.title = "sssss"
     // 根据id获取歌词
     getSongLyric(id).then(res => {
       const  lyricStr = res.lrc.lyric
@@ -74,12 +77,18 @@ Page({
         lyrics:lyrArr
       })
     })
+
+  
+    audioContext.onPause(() => {
+      console.log('paly');
+    })
     audioContext.stop()
     //根据id播放歌曲
-    audioContext.src =  `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+    console.log(id);
+    audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
     // 加载完中的播放
-    audioContext.autoplay = true
-    
+    // audioContext.autoplay = true
+    audioContext.play()
     // 
     // if(!this.data.lyrics.length) {
     //   this.setData({lyricText:this.data.lyrics[0].text})
@@ -115,6 +124,7 @@ Page({
         // 优化性能
       if(this.data.currentIndex === index)return
       if(!this.data.lyrics[index].text) return
+      
       this.setData({
         lyricText:this.data.lyrics[index].text,
         currentIndex:index,
@@ -137,10 +147,32 @@ Page({
       if(this.data.moduleIndex === 1) return
       this.changeSongIndex()
     })
+    audioContext.onPlay(() => {
+      this.setData({isPlayorPause:true})
+    })
+    audioContext.onPause(() => {
+      this.setData({isPlayorPause:false})
+    })
+    audioContext.onError(() => {
+      console.log('eer');
+      this.changeSongIndex()
+    })
+    // 下一首
+    audioContext.onNext(() => {
+      this.changeSongIndex()
+    })
+    // 上一首
+    audioContext.onPrev(() => {
+      this.changeSongIndex(false)
+    })
   },
   // 网络请求
   async fetchSongDetail(id){
     const res = await getSongDetali(id)
+    console.log(res);
+    audioContext.title = res.songs[0].name
+    audioContext.singer = res.songs[0].ar[0].name
+    audioContext.coverImgUrl = res.songs[0].al.picUrl
     this.setData({
       songDetail:res.songs,
       durationTime:res.songs[0].dt
@@ -167,9 +199,9 @@ Page({
   
   //  计算出要播放的时间位置
   const currentTime = value / 100 * this.data.durationTime
-  console.log(currentTime);
   // 设置播放器播放的计算出的时间
    audioContext.seek(currentTime / 1000)
+   audioContext.play()
    this.setData({
      currentTime:currentTime, 
      scheduleValue:value,
@@ -180,12 +212,12 @@ Page({
   onScheduleChanging(event) {
     this.setData({type:event.type})
   //  获取拖动进度条对应的值
-  //  const value = event.detail.value
+   const value = event.detail.value
    //  计算出要播放的时间位置
-  //  const currentTime = value / 100 * this.data.durationTime
+   const currentTime = value / 100 * this.data.durationTime
 
-  //  this.setData({currentTime:currentTime})
-  //  audioContext.seek(currentTime / 1000)
+   this.setData({currentTime})
+   audioContext.seek(currentTime / 1000)
   //  audioContext.pause()
   },
   // 点击播放/暂停
@@ -214,6 +246,7 @@ Page({
       songDetail:{},
       durationTime:0,
       scheduleValue:0,
+      lyricText:'',
       isPlayorPause:true
     })
      // 获取索引

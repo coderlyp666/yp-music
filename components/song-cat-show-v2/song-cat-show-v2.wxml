@@ -10,6 +10,6 @@
   </view>
   </view>
   <view class="right">
-    <van-icon name="arrow" />
+    <image src="../../assets/images/icons/arrow-right.png" mode="widthFix"/>
   </view>
 </view>

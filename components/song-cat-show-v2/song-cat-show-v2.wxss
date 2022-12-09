@@ -27,3 +27,7 @@
   width: 120rpx;
   border-radius: 14rpx;
 }
+
+.right image {
+  width: 30rpx;
+}
