@@ -8,6 +8,7 @@
       itemData="{{item}}" 
       index="{{index}}" 
       bindtap="onSongItemTap"
+      bind:delIndex="delIndex"
       data-index="{{index}}"
     />
   </block>

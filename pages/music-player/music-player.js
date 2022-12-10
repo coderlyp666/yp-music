@@ -3,6 +3,8 @@ import { getSongDetali, getSongLyric } from "../../services/player"
 import parseLyric from "../../utils/parse-lyric"
 import playerStore from "../../store/playerStore"
 
+import { HCollection } from "../../database/database"
+
 const app = getApp()
 const audioContext = wx.getBackgroundAudioManager()
 audioContext.title = 'jay'
@@ -53,6 +55,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+   
     // 获取歌曲id
     const id = options.id
     this.setData({
@@ -170,6 +173,16 @@ Page({
   async fetchSongDetail(id){
     const res = await getSongDetali(id)
     console.log(res);
+     // 将播放歌曲添加到历史记录
+    // 查询历史记录有没有此歌
+    const queryHistory = await HCollection.select({
+      name:res.songs[0].name
+    },false)
+    // 有就不添加
+    if(!queryHistory.data.length) {
+      const c_history = await HCollection.add(res.songs[0])
+    }
+    // 设置工具类
     audioContext.title = res.songs[0].name
     audioContext.singer = res.songs[0].ar[0].name
     audioContext.coverImgUrl = res.songs[0].al.picUrl

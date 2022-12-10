@@ -28,6 +28,6 @@
   border-radius: 14rpx;
 }
 
-.right image {
+.right .icon {
   width: 30rpx;
 }

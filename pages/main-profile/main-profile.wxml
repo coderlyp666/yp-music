@@ -1,0 +1,18 @@
+<view class="userinfo section" bindtap="onInfoTap">
+  <image wx:if="{{userInfo.avatarUrl}}" class="login" src="{{userInfo.avatarUrl}}" mode="widthFix"/>
+  <image wx:else class="login" src="../../assets/images/music/avatar_placeholder.png" mode="widthFix"/>
+  <view class="username">
+   {{userInfo.nickName ? userInfo.nickName : '未登录'}}
+  </view>
+</view>
+
+<view class="domain section">
+  <block wx:for="{{tabs}}" wx:key="name">
+    <view class="item" bindtap="onTabItem" data-item="{{item}}">
+      <image class="icon" src="../../assets/images/music/{{item.type}}.png" mode="widthFix"/>
+      <view class="name">{{item.name}}</view>
+    </view>
+  </block>
+</view>
+
+

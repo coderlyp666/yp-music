@@ -1,6 +1,6 @@
 {
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "projectname": "music",
+  "projectname": "yp-music",
   "setting": {
     "compileHotReLoad": false,
     "urlCheck": false
@@ -33,6 +33,20 @@
           "name": "搜索",
           "pathName": "pages/detail-search/detail-search",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "profile",
+          "pathName": "pages/main-profile/main-profile",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "歌曲列表",
+          "pathName": "pages/detail-ranking/detail-ranking",
+          "query": "type=song&id=870395774",
           "launchMode": "default",
           "scene": null
         }

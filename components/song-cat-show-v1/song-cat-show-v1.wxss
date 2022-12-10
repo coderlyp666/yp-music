@@ -4,16 +4,25 @@ page {
 }
 .item {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item .left{
+  flex: 1;
+  display: flex;
   align-items: center;
   margin: 20rpx 0;
+  
 }
 .item .index {
   margin-right: 20rpx;
 }
 .item .song-info {
-  flex: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
+ 
+  
 }
 .item .song-info .ar{
   display: flex;
@@ -23,11 +32,25 @@ page {
 }
 
 .item .song-info .song-name {
+  width: 500rpx;
   margin-bottom: 10rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+ 
 }
 
 .item .song-info .ar .icon {
   width: 38rpx;
   height: 22rpx;
   margin-right: 10rpx;
+}
+
+.item .right {
+  width: 200rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

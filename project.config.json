@@ -4,6 +4,7 @@
     "ignore": [],
     "include": []
   },
+  "cloudfunctionRoot": "cloudfuncitons/",
   "setting": {
     "bundle": false,
     "userConfirmedBundleSwitch": false,
@@ -41,7 +42,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
-  "appid": "wxa33959c058121ebd",
+  "appid": "wxc75733e50298677b",
   "projectname": "miniprogram-92",
   "condition": {},
   "editorSetting": {

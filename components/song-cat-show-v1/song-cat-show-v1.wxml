@@ -1,15 +1,21 @@
 <!--components/song-cat-show-v1/song-cat-show-v1.wxml-->
 <view class="item" bindtap="onSongItemTap">
-  <view class="index">
-    {{index + 1}}
+  <view class="left">
+    <view class="index">
+      {{index + 1}}
+    </view>
+    <view class="song-info">
+      <view class="song-name">
+        {{itemData.name}}
+      </view>
+      <view class="ar" wx:if="{{itemData.ar}}">
+        <image class="icon" src="../../assets/images/icons/sq_icon.png" mode="widthFix"/>
+        <view class="name"> {{itemData.ar[0].name}} </view>
+      </view>
+    </view>
   </view>
-  <view class="song-info">
-    <view class="song-name">
-      {{itemData.name}}
-    </view>
-    <view class="ar" wx:if="{{itemData.ar}}">
-      <image class="icon" src="../../assets/images/icons/sq_icon.png" mode="widthFix"/>
-      <view class="name"> {{itemData.ar[0].name}} </view>
-    </view>
+  <view class="right" catchtap="onDomainTap">
+    <van-icon name="more-o" />
   </view>
 </view>
+

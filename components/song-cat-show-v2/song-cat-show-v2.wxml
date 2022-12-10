@@ -10,6 +10,6 @@
   </view>
   </view>
   <view class="right">
-    <image src="../../assets/images/icons/arrow-right.png" mode="widthFix"/>
+    <image class="icon" src="../../assets/images/icons/arrow-right.png" mode="widthFix"/>
   </view>
 </view>
