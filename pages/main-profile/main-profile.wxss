@@ -1,11 +1,13 @@
 /* pages/main-profile/main-profile.wxss */
 page {
   background-color: #f5f5f5;
+  padding: 30rpx;
+  box-sizing: border-box;
 }
 .section {
-  margin: 40rpx;
-  padding: 30rpx;
   background-color: #fff;
+  padding: 20rpx;
+  margin: 20rpx 0;
   box-sizing: border-box;
 }
 
@@ -35,4 +37,23 @@ page {
 }
 .domain .item .name {
   font-size: 26rpx;
+}
+
+.menu {
+
+}
+.menu .header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.dialog .input {
+  height: 80rpx;
+  margin: 40rpx 60rpx;
+  padding: 0 20rpx;
+  border: 1px solid #eee;
+  font-size: 28rpx;
 }

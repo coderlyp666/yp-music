@@ -1,4 +1,4 @@
-const db = wx.cloud.database()
+export const db = wx.cloud.database()
 class YPCollection {
   constructor(c_name) {
     this.collection =  db.collection(c_name)
@@ -39,6 +39,8 @@ class YPCollection {
   }
 }
 
+
 export const fCollection = new YPCollection('c_favorite')
 export const LCollection = new YPCollection('c_like')
 export const HCollection = new YPCollection('c_history')
+export const MCollection = new YPCollection('c_menu')

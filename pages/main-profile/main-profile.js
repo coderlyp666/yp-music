@@ -1,4 +1,8 @@
 // pages/main-profile/main-profile.js
+import { MCollection } from "../../database/database"
+import menuStore from "../../store/menuStore"
+const app = getApp()
+const openid = app.globalObject.openid
 Page({
 
   /**
@@ -12,14 +16,25 @@ Page({
       { name: "我的喜欢", type: "like" },
       { name: "最近播放", type: "history" },
     ],
-    isLogin:false
+    isLogin:false,
+    isShow:false,
+    // 菜单名称
+    menuName:'',
+    // 菜单列表
+    menuList:[]
   },
  async onLoad() {
+    
     const userInfo = await wx.getStorageSync('userInfo')
     if(userInfo) {
       this.setData({userInfo})
     }
     // console.log(userInfo);
+    //查询歌单
+    if(!openid)return
+    menuStore.onState("menuList", value => {
+      this.setData({menuList:value})
+    })
   },
   //事件监听 
 
@@ -63,6 +78,7 @@ Page({
   // 点击跳转
   onTabItem(event) {
     const openid = wx.getStorageSync('openid')
+    console.log(openid);
     if(!openid){
       if(event.currentTarget.dataset.item.type === 'history') {
         
@@ -75,9 +91,61 @@ Page({
       }
     }
     const {name, type} = event.currentTarget.dataset.item
-    console.log(type);
+    console.log( type);
     wx.navigateTo({
       url: `/pages/detail-ranking/detail-ranking?type=${type}&name=${name}`,
     })
-  }
+  },
+  // 展示dialog
+  onAddSongTap() {
+    if(!openid){
+      wx.showToast({
+        title: '请先登录~',
+        icon:"error"
+      })
+      return
+    }
+    this.setData({isShow:true})
+  
+  },
+  // 歌单跳转
+  onMenuItemTap(event) {
+    console.log(event.currentTarget.dataset.index);
+    const index = event.currentTarget.dataset.index
+    wx.navigateTo({
+      url: `/pages/detail-ranking/detail-ranking?type=menu&index=${index}`,
+      
+    })
+  },
+  // 添加歌单
+ async onConfirmClick() {
+   if(this.data.menuName.trim() === ""){
+     wx.showToast({
+       title: '歌单名称为空',
+       icon:"error"
+     })
+     return
+   }
+   const res1 = await MCollection.select({
+     name:this.data.menuName
+   },false)
+   console.log(res1);
+   if(res1.data.length) {
+     wx.showToast({
+       title: '该歌单已存在',
+       icon:"error"
+     })
+     return
+   }
+   const res2 = await MCollection.add({
+      name:this.data.menuName,
+      songList:[]
+    })
+    if(res2) {
+      wx.showToast({
+        title: '添加成功',
+      })
+    }
+    menuStore.dispatch("fetchMenuListData")
+  },
 })

@@ -15,4 +15,33 @@
   </block>
 </view>
 
+<view class="menu">
+  <area-title title="我的歌单" isShow="{{false}}"/>
+  <view class="section song">
+    <view class="header">
+      <view>创建歌单</view>
+      <van-icon name="plus" bindtap="onAddSongTap"/>
+    </view>
+    <view class="songList">
+      <block wx:for="{{menuList}}" wx:key="_id">
+       <menu-item 
+        itemData="{{item}}" 
+        data-index="{{index}}" bindtap="onMenuItemTap"
+       />
+      </block>
+    </view>
+  </view>
+</view>
 
+
+<van-dialog
+  use-slot
+  class="dialog"
+  title="新建歌单"
+  show="{{ isShow }}"
+  show-cancel-button
+  bind:confirm="onConfirmClick"
+  bind:close="closeDialog"
+>
+ <input type="text" model:value="{{menuName}}" class="input" placeholder="请输入歌单名称"/>
+</van-dialog>

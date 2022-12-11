@@ -3,6 +3,8 @@ import rankingStore from "../../store/rankingStore"
 import recommendStore from "../../store/recommendStore"
 import { getMusicSongList } from "../../services/music"
 import playerStore from "../../store/playerStore";
+import menuStore from "../../store/menuStore";
+
 
 import {fCollection, LCollection, HCollection} from "../../database/database"
 Page({
@@ -16,7 +18,9 @@ Page({
     id:0,
     offset:0,
     collection:{},
-    flag:true
+    flag:true,
+    menuList:[],
+    menuName:'',
   },
 
   /**
@@ -24,8 +28,13 @@ Page({
    */
  async onLoad(options) {
   // 获取openid
-  const openid = wx.getStorageSync('openid')
-
+    const openid = wx.getStorageSync('openid')
+    this.data.menuName = options.type
+    
+    menuStore.onState("menuList", value => {
+      console.log(value);
+      this.setData({menuList:value})
+    })
     console.log(options);
     if(options.type === 'ranking') {
       rankingStore.onState(options.key, value => {
@@ -39,6 +48,7 @@ Page({
         })
       })
     }else if(options.type === 'recommend') {
+      
       recommendStore.onState('recommendSongInfos', value => {
         wx.setNavigationBarTitle({
           title:'推荐歌曲',
@@ -121,7 +131,7 @@ Page({
       this.setData({
         collection:HCollection
       })
-      const res = await this.data.collection.select()
+      const res = await this.data.collection.select(null, true, this.data.offset)
       console.log(res);
       wx.setNavigationBarTitle({
         title:options.name,
@@ -133,8 +143,17 @@ Page({
         },
         type:options.name,
       })
+
+    }else if(options.type === 'menu') {
+      console.log(options.index);
+      console.log(options.name);
+      const list = this.data.menuList[options.index].songList
+      const name = this.data.menuList[options.index].name
       this.setData({
-        offset:this.data.rankings.tracks.length
+        rankings:{
+          tracks:list,
+          name
+        }
       })
     }
   },
@@ -169,15 +188,20 @@ Page({
     this.hasReachBottom()
   },
  async hasReachBottom() {
-    const res = await this.data.collection.select(null,true,this.data.offset)
+   const type = this.data.menuName
+    const res = await this.data.collection.select(null, true ,this.data.offset)
+    if(res.data.length === 0) {
+      return
+    }
     console.log(res);
-    if(res.data.length < 20 && !this.data.flag) return
-   this.data.flag = false
     const newArr = [...this.data.rankings.tracks, ...res.data]
     this.setData({
       rankings:{
         tracks:newArr
       }
+    })
+    this.setData({
+      offset:this.data.rankings.tracks.length
     })
   }
 

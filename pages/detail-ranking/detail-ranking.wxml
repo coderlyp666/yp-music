@@ -2,11 +2,12 @@
 
 <view class="ranking">
   <song-header itemData="{{rankings}}" wx:if="{{ type === 'song' && rankings.name}}"/>
-  <area-title title="{{rankings.name}}" isShow="{{false}}" wx:else=""/>
+  <area-title title="{{rankings.name}}" isShow="{{false}}" wx:else/>
   <block wx:for="{{rankings.tracks}}" wx:key="id">
     <song-cat-show-v1 
       itemData="{{item}}" 
       index="{{index}}" 
+      menuList="{{menuList}}" 
       bindtap="onSongItemTap"
       bind:delIndex="delIndex"
       data-index="{{index}}"

@@ -1,5 +1,13 @@
 // components/song-cat-show-v1/song-cat-show-v1.js
-import { fCollection, LCollection } from "../../database/database"
+import { 
+  fCollection, 
+  LCollection ,
+  MCollection, 
+  db
+} from "../../database/database"
+import menuStore from "../../store/menuStore"
+
+const app = getApp()
 Component({
   /**
    * 组件的属性列表
@@ -12,6 +20,10 @@ Component({
     index:{
       type:Number,
       value:0
+    },
+    menuList:{
+      type:Array,
+      value:[]
     }
   },
 
@@ -35,13 +47,30 @@ Component({
     },
     onDomainTap() {
       wx.showActionSheet({
-        itemList: ['收藏', '喜欢'],
+        itemList: ['收藏', '喜欢', '添加至歌单'],
       }).then(async res => {
           console.log(res.tapIndex)
           if(res.tapIndex === 0) {
            this.hasDomain(fCollection, '收藏')
           }else if(res.tapIndex === 1) {
             this.hasDomain(LCollection, '喜欢')
+          }else if(res.tapIndex === 2) {
+            const openid = app.globalObject.openid
+            if(!openid){
+              wx.showToast({
+                title: '请先登录~',
+                icon:"error"
+              })
+              return
+            }
+            const names = this.properties.menuList.map(item => {
+              return item.name
+            })
+            wx.showActionSheet({
+              itemList: names,
+            }).then(res => {
+              this.hasMenuIndex(res.tapIndex)
+            })
           }
       }).catch(err => {
         console.log(err);
@@ -86,6 +115,20 @@ Component({
           // this.data..splice
           this.triggerEvent('delIndex', this.properties.index)
         }
+      }
+    },
+    async hasMenuIndex(index) {
+      const menuItem = this.properties.menuList[index]
+      const _id = menuItem._id
+      const cmd = db.command
+      const res = await MCollection.update(_id,{
+        songList:cmd.push(this.properties.itemData)
+      })
+      if(res) {
+        wx.showToast({
+          title: '添加成功',
+        })
+        menuStore.dispatch("fetchMenuListData")
       }
     }
     
